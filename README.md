@@ -10,7 +10,7 @@ Passionate about **Machine Learning & AI** — building intelligent systems and 
 - Currently pursuing B.Tech at VIT Bhopal (2023–2027)
 - Focused on Machine Learning, Computer Vision, and Agentic AI
 - Always exploring new tools and frameworks to solve meaningful problems
-- Currently learning: Deep Learning, AI Agents, Cloud (AWS)
+- Currently learning: Deep Learning, AI Agents
 
 ---
 
