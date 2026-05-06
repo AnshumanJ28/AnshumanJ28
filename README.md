@@ -59,7 +59,7 @@ A fully functional chess engine built from scratch in Python, powered by a custo
 - `Train.py` — Self-play training loop
 - `main.py` — Game entry point
 
-[View Repository](https://github.com/AnshumanJ28/Chess-Engine)
+[View Repository](https://github.com/AnshumanJ28/AlphaZ0)
 
 ---
 
