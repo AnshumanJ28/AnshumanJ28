@@ -1,14 +1,14 @@
 # Hi, I'm Anshuman Pandey
 
 B.Tech Student at **VIT Bhopal** | Batch of 2027
-Passionate about **Machine Learning & AI** — building intelligent systems and exploring real-world applications of deep learning.
+Passionate about **Machine Learning & AI** — building intelligent systems and exploring real-world applications of deep learning, from research to production.
 
 ---
 
 ## About Me
 
 - Currently pursuing B.Tech at VIT Bhopal (2023–2027)
-- Focused on Machine Learning, Computer Vision, and Agentic AI
+- Focused on Machine Learning, Computer Vision, MLOps, and Agentic AI
 - Always exploring new tools and frameworks to solve meaningful problems
 - Currently learning: Deep Learning, AI Agents
 
@@ -30,12 +30,20 @@ Passionate about **Machine Learning & AI** — building intelligent systems and 
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![LightGBM](https://img.shields.io/badge/LightGBM-9ACD32?style=for-the-badge&logo=python&logoColor=white)
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=python&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=for-the-badge&logo=python&logoColor=white)
 ![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
 ![Keras](https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white)
 ![timm](https://img.shields.io/badge/timm-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+
+### MLOps & Deployment
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)
+![DVC](https://img.shields.io/badge/DVC-945DD6?style=for-the-badge&logo=dvc&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 
 ### Tools & Platforms
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
@@ -47,6 +55,21 @@ Passionate about **Machine Learning & AI** — building intelligent systems and 
 ---
 
 ## Featured Projects
+
+### MLOps Demand Forecasting Pipeline
+An end-to-end MLOps pipeline for spatio-temporal traffic demand forecasting — covering data versioning, feature engineering, model training, REST API serving, and automated drift monitoring.
+
+**What's under the hood:**
+- `src/features.py` — Feature engineering pipeline: geohash encoding, rush-hour flags, cyclical sine/cosine hour encoding
+- `src/train.py` — LightGBM model training with RMSE, MAE, and R² logged to **MLflow** (tracked on DagsHub)
+- `src/monitor.py` — Automated drift monitoring using **Evidently AI**
+- `api/app.py` — **FastAPI** prediction endpoint serving real-time demand forecasts
+- `.github/workflows/ci.yml` — **GitHub Actions** CI pipeline running tests on every push
+- Data and pipeline artifacts versioned with **DVC** + Google Drive remote, containerized with **Docker**
+
+[View Repository](https://github.com/AnshumanJ28/mlops-demand-forecasting)
+
+---
 
 ### Chess Engine with AlphaZero-style AI
 A fully functional chess engine built from scratch in Python, powered by a custom **Neural Network + Monte Carlo Tree Search (MCTS)** — inspired by DeepMind's AlphaZero.
@@ -79,7 +102,7 @@ Achieved strong ROC-AUC with a two-phase fine-tuning strategy.
 | Stat | Value |
 |---|---|
 | Profile | AnshumanJ28 |
-| Focus | Machine Learning & AI |
+| Focus | Machine Learning, MLOps & AI |
 | University | VIT Bhopal |
 | Batch | 2027 |
 
