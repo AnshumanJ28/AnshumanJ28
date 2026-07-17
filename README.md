@@ -24,6 +24,26 @@ I care about the unglamorous middle part of ML — getting a model out of a note
 
 These are the ones I'd actually want you to look at first.
 
+### TalentMatch AI
+Resume ↔ Job Description ATS match scorer — upload a resume PDF, paste a JD, and get a 0–1 match score with a plain-English explanation of the strongest signals and a matched/missing/partial skills breakdown. Simulates how an ATS actually evaluates a candidate instead of hiding behind a black-box score.
+
+| Component | What it does |
+|---|---|
+| `src/parsing/` | PDF extraction + LLM-based resume structuring via Groq, with EasyOCR fallback for scanned/image PDFs |
+| `src/skills/` | Skill extraction and normalization against a canonical taxonomy (RapidFuzz matching) |
+| `src/features/` | Feature engineering — experience, seniority, education, skill-match ratios |
+| `src/embeddings/` | Resume/JD embedding via sentence-transformers |
+| `src/ranking/` | `HeuristicRanker` — 60% cosine similarity + 40% fused numeric features into one score |
+| `src/explainability/` | Human-readable narrative summary generated alongside the score |
+| `app.py` | Gradio web UI, deployable to Hugging Face Spaces (Docker SDK) |
+| CI | `pytest` end-to-end pipeline test |
+
+De-Colab'd from an original research notebook — collapsed duplicate config/device/logger boilerplate into single canonical implementations (`src/config.py`, `src/devices.py`), fixed a phase-ordering bug, and simplified the ranker to a pure heuristic (dropped FAISS + LightGBM, which existed for candidate-pool ranking that a single resume/JD flow doesn't need).
+
+[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/talentmatch-ai)
+
+---
+
 ### MLOps Demand Forecasting Pipeline
 End-to-end MLOps pipeline for spatio-temporal traffic demand forecasting — data versioning, feature engineering, model training, API serving, and automated drift monitoring, all wired together with production tooling.
 
@@ -146,6 +166,14 @@ A few more things I've shipped, worth a quick look if you're curious:
 ![Google Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
 ![Groq](https://img.shields.io/badge/Groq-F55036?style=for-the-badge&logo=groq&logoColor=white)
 ![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
+![Sentence Transformers](https://img.shields.io/badge/Sentence--Transformers-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
+
+**Document & NLP Processing**
+
+![PyMuPDF](https://img.shields.io/badge/PyMuPDF-1E90FF?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)
+![EasyOCR](https://img.shields.io/badge/EasyOCR-2C3E50?style=for-the-badge&logo=python&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=pydantic&logoColor=white)
+![RapidFuzz](https://img.shields.io/badge/RapidFuzz-4B8BBE?style=for-the-badge&logo=python&logoColor=white)
 
 **MLOps & Deployment**
 
@@ -159,6 +187,7 @@ A few more things I've shipped, worth a quick look if you're curious:
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Evidently AI](https://img.shields.io/badge/Evidently_AI-FF6B35?style=for-the-badge&logo=python&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+![Hugging Face Spaces](https://img.shields.io/badge/HF_Spaces-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
 ![Cloudflare](https://img.shields.io/badge/Cloudflare_Tunnel-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
 
 **Tools & Platforms**
