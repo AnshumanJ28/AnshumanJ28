@@ -2,10 +2,9 @@
 
 # Hey, I'm Anshuman
 
-portfolio : https://anshumanj.onrender.com/
-
 B.Tech @ VIT Bhopal · Class of 2027 · Machine Learning & AI
 
+[![Portfolio](https://img.shields.io/badge/Portfolio-0A1930?style=for-the-badge&logo=vercel&logoColor=D4AF37)](https://anshumanj.onrender.com/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anshuman-pandey-a77940279/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28)
 
@@ -178,11 +177,7 @@ A few more things I've shipped, worth a quick look if you're curious:
 ## GitHub Stats
 
 <div align="center">
-
-
-
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=AnshumanJ28&show_icons=true&theme=react)
+<img src="https://streak-stats.demolab.com/?user=AnshumanJ28&hide_border=true&background=1A2B6D&ring=C0C0C0&fire=C0C0C0&currStreakLabel=E8E8E8&sideLabels=E8E8E8&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=8FA0C7" width="49%" />
 
 </div>
 
@@ -192,6 +187,7 @@ A few more things I've shipped, worth a quick look if you're curious:
 
 Always up for talking ML, chess, or why your pipeline broke at 2am.
 
+[![Portfolio](https://img.shields.io/badge/Portfolio-0A1930?style=for-the-badge&logo=vercel&logoColor=D4AF37)](https://anshumanj.onrender.com/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anshuman-pandey-a77940279/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28)
 
