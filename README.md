@@ -182,7 +182,7 @@ A few more things I've shipped, worth a quick look if you're curious:
 
 
 
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=AnshumanJ28&theme=react)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=AnshumanJ28&show_icons=true&theme=react)
 
 </div>
 
