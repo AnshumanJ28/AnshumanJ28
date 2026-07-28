@@ -24,23 +24,37 @@ I care about the unglamorous middle part of ML — getting a model out of a note
 
 These are the ones I'd actually want you to look at first.
 
-### TalentMatch AI
-Resume ↔ Job Description ATS match scorer — upload a resume PDF, paste a JD, and get a 0–1 match score with a plain-English explanation of the strongest signals and a matched/missing/partial skills breakdown. Simulates how an ATS actually evaluates a candidate instead of hiding behind a black-box score.
+### LLM Agent From Scratch
+A tool-using ReAct (Reason + Act) agent built **without any agent framework** — no LangChain, no LangGraph, no CrewAI. Everything an off-the-shelf framework would normally hand you is hand-rolled here instead, to prove out a real understanding of agent internals rather than framework glue.
 
 | Component | What it does |
 |---|---|
-| `src/parsing/` | PDF extraction + LLM-based resume structuring via Groq, with EasyOCR fallback for scanned/image PDFs |
-| `src/skills/` | Skill extraction and normalization against a canonical taxonomy (RapidFuzz matching) |
-| `src/features/` | Feature engineering — experience, seniority, education, skill-match ratios |
-| `src/embeddings/` | Resume/JD embedding via sentence-transformers |
-| `src/ranking/` | `HeuristicRanker` — 60% cosine similarity + 40% fused numeric features into one score |
-| `src/explainability/` | Human-readable narrative summary generated alongside the score |
-| `app.py` | Gradio web UI, deployable to Hugging Face Spaces (Docker SDK) |
-| CI | `pytest` end-to-end pipeline test |
+| Reasoning loop | Hand-rolled ReAct loop — no LangChain/LangGraph/CrewAI |
+| Tool schemas | Auto-generated tool-calling schemas |
+| Memory | Conversation and task-state memory |
+| Eval harness | 4/4 eval suite passing, 12 unit tests passing |
+| Guardrails | Input/output guardrails around tool use |
+| Sandboxed execution | Isolated environment for the agent's code-execution tool |
+| Tracing | Full execution tracing for debugging agent runs |
 
-De-Colab'd from an original research notebook — collapsed duplicate config/device/logger boilerplate into single canonical implementations (`src/config.py`, `src/devices.py`), fixed a phase-ordering bug, and simplified the ranker to a pure heuristic (dropped FAISS + LightGBM, which existed for candidate-pool ranking that a single resume/JD flow doesn't need).
+[![Live Demo](https://img.shields.io/badge/Live_Demo-success?style=for-the-badge&logo=render&logoColor=white)](https://llm-agent-tez2.onrender.com)
+[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/LLM-agent)
 
-[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/talentmatch-ai)
+---
+
+### Chess Engine with AlphaZero-style AI
+This is the one closest to my heart. A complete chess engine and AI, built from the ground up in Python — no Stockfish wrappers. A full rules engine, a custom residual network, and a self-play MCTS training loop inspired by DeepMind's AlphaZero.
+
+| Component | What it does |
+|---|---|
+| `chesseng.py` | Full rules engine: move generation, castling, en passant, promotions, check/mate |
+| `NeuralNet.py` | 10-ResBlock network with policy head (move probabilities) + value head (position eval) |
+| `mcts.py` | MCTS with UCB scoring, Dirichlet noise for exploration, and value backup |
+| `BoardEncoder.py` | 18-plane tensor encoding of full board state |
+| `Train.py` | Self-play training loop (A3C) |
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-success?style=for-the-badge&logo=render&logoColor=white)](https://alphaz0.onrender.com)
+[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/AlphaZ0)
 
 ---
 
@@ -60,18 +74,24 @@ End-to-end MLOps pipeline for spatio-temporal traffic demand forecasting — dat
 
 ---
 
-### Recommendation System with A/B Testing
-An ALS-based recommender paired with a statistically rigorous A/B testing framework — the kind of evaluation layer most recsys portfolio projects skip entirely.
+### TalentMatch AI
+Resume ↔ Job Description ATS match scorer — upload a resume PDF, paste a JD, and get a 0–1 match score with a plain-English explanation of the strongest signals and a matched/missing/partial skills breakdown. Simulates how an ATS actually evaluates a candidate instead of hiding behind a black-box score.
 
 | Component | What it does |
 |---|---|
-| ALS model | Implicit-feedback matrix factorization for candidate recommendations |
-| A/B assignment | Deterministic user bucketing via MD5 hashing, reproducible across runs |
-| Significance testing | Two-proportion z-test with power analysis to validate uplift |
-| Dashboard | Streamlit app for exploring results, served via Cloudflare Tunnel |
-| `api/` | FastAPI serving layer for live recommendations |
+| `src/parsing/` | PDF extraction + LLM-based resume structuring via Groq, with EasyOCR fallback for scanned/image PDFs |
+| `src/skills/` | Skill extraction and normalization against a canonical taxonomy (RapidFuzz matching) |
+| `src/features/` | Feature engineering — experience, seniority, education, skill-match ratios |
+| `src/embeddings/` | Resume/JD embedding via sentence-transformers |
+| `src/ranking/` | `HeuristicRanker` — 60% cosine similarity + 40% fused numeric features into one score |
+| `src/explainability/` | Human-readable narrative summary generated alongside the score |
+| `app.py` | Gradio web UI, deployable to Hugging Face Spaces (Docker SDK) |
+| CI | `pytest` end-to-end pipeline test |
 
-[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/recsys-ab-testing)
+De-Colab'd from an original research notebook — collapsed duplicate config/device/logger boilerplate into single canonical implementations (`src/config.py`, `src/devices.py`), fixed a phase-ordering bug, and simplified the ranker to a pure heuristic (dropped FAISS + LightGBM, which existed for candidate-pool ranking that a single resume/JD flow doesn't need).
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-success?style=for-the-badge&logo=vercel&logoColor=white)](https://talentmatch-ai-se48.vercel.app/)
+[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/talentmatch-ai)
 
 ---
 
@@ -88,6 +108,21 @@ Upload a PDF or text document, ask questions in plain English, and get answers g
 | `tests/` + CI | pytest with deterministic fake embeddings; CI runs fully offline |
 
 [![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/rag-document-qa)
+
+---
+
+### Recommendation System with A/B Testing
+An ALS-based recommender paired with a statistically rigorous A/B testing framework — the kind of evaluation layer most recsys portfolio projects skip entirely.
+
+| Component | What it does |
+|---|---|
+| ALS model | Implicit-feedback matrix factorization for candidate recommendations |
+| A/B assignment | Deterministic user bucketing via MD5 hashing, reproducible across runs |
+| Significance testing | Two-proportion z-test with power analysis to validate uplift |
+| Dashboard | Streamlit app for exploring results, served via Cloudflare Tunnel |
+| `api/` | FastAPI serving layer for live recommendations |
+
+[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/recsys-ab-testing)
 
 ---
 
@@ -109,25 +144,13 @@ Real-time object detection and multi-object tracking pipeline. Detects objects f
 
 ---
 
-### Chess Engine with AlphaZero-style AI
-This is the one closest to my heart. A complete chess engine and AI, built from the ground up in Python — no Stockfish wrappers. A full rules engine, a custom residual network, and a self-play MCTS training loop inspired by DeepMind's AlphaZero.
-
-| Component | What it does |
-|---|---|
-| `chesseng.py` | Full rules engine: move generation, castling, en passant, promotions, check/mate |
-| `NeuralNet.py` | 10-ResBlock network with policy head (move probabilities) + value head (position eval) |
-| `mcts.py` | MCTS with UCB scoring, Dirichlet noise for exploration, and value backup |
-| `BoardEncoder.py` | 18-plane tensor encoding of full board state |
-| `Train.py` | Self-play training loop |
-
-[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/AlphaZ0)
-
----
-
 ## Other builds
 
 A few more things I've shipped, worth a quick look if you're curious:
 
+- **[federated-learning-sim](https://github.com/AnshumanJ28/federated-learning-sim)** — Privacy-preserving FedAvg simulation across virtual clients (Flower + PyTorch), benchmarked against centralized training on IID and non-IID splits, with client dropout modeling, an optional differential-privacy layer (Opacus), MLflow tracking, and a Dockerized serving API.
+- **[rag-document-chatbot](https://github.com/AnshumanJ28/rag-document-chatbot)** — A second take on RAG: MMR retrieval + cross-encoder re-ranking, Groq's Llama 3.1 for generation, and MLflow-tracked queries in a Gradio chat UI.
+- **[NexusTwin](https://github.com/AnshumanJ28/NexusTwin)** — AI digital twin for smart building energy monitoring: simulated live sensor data, anomaly detection, forecasting, and optimization recommendations.
 - **[Diabatic-B5](https://github.com/AnshumanJ28/Diabatic-B5)** — Retinal disease classification with EfficientNet-B5, trained on APTOS 2019 and tested for generalization on RFMiD.
 
 ---
@@ -159,9 +182,8 @@ A few more things I've shipped, worth a quick look if you're curious:
 ![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=for-the-badge&logo=python&logoColor=white)
 
-**LLM & RAG**
+**LLM, Agents & RAG**
 
-![LangChain](https://img.shields.io/badge/LangChain-121212?style=for-the-badge&logo=chainlink&logoColor=white)
 ![FAISS](https://img.shields.io/badge/FAISS-0064C8?style=for-the-badge&logo=meta&logoColor=white)
 ![Google Gemini](https://img.shields.io/badge/Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)
 ![Groq](https://img.shields.io/badge/Groq-F55036?style=for-the-badge&logo=groq&logoColor=white)
