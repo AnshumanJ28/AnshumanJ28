@@ -232,6 +232,13 @@ A few more things I've shipped, worth a quick look if you're curious:
 
 </div>
 
+## LeetCode Stats
+
+<div align="center">
+<img src="https://leetcard.jacoblin.cool/Anshuman_Pandey28?theme=dark&font=baloo&ext=heatmap" width="49%" />
+
+</div>
+
 ---
 
 <div align="center">
