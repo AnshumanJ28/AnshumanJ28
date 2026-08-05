@@ -74,24 +74,46 @@ End-to-end MLOps pipeline for spatio-temporal traffic demand forecasting — dat
 
 ---
 
-### TalentMatch AI
-Resume ↔ Job Description ATS match scorer — upload a resume PDF, paste a JD, and get a 0–1 match score with a plain-English explanation of the strongest signals and a matched/missing/partial skills breakdown. Simulates how an ATS actually evaluates a candidate instead of hiding behind a black-box score.
+### TalentMatch AI v2
+Resume ↔ Job Description ATS match scorer — upload a resume PDF, paste a JD, and get a 0–100 match score with a matched/missing/partial skills breakdown and plain-English explanation of the strongest signals. v2 rebuilt the entire scoring path in native C++: **no LLM, no API key, fully deterministic.**
 
 | Component | What it does |
 |---|---|
-| `src/parsing/` | PDF extraction + LLM-based resume structuring via Groq, with EasyOCR fallback for scanned/image PDFs |
-| `src/skills/` | Skill extraction and normalization against a canonical taxonomy (RapidFuzz matching) |
-| `src/features/` | Feature engineering — experience, seniority, education, skill-match ratios |
-| `src/embeddings/` | Resume/JD embedding via sentence-transformers |
-| `src/ranking/` | `HeuristicRanker` — 60% cosine similarity + 40% fused numeric features into one score |
-| `src/explainability/` | Human-readable narrative summary generated alongside the score |
-| `app.py` | Gradio web UI, deployable to Hugging Face Spaces (Docker SDK) |
-| CI | `pytest` end-to-end pipeline test |
+| `cpp_core/parser/` | Deterministic regex-based resume parser (dates, contact info, sections) — replaced the old Groq/LLM parsing step |
+| `cpp_core/skills/` | Aho-Corasick trie + synonym matching against a canonical skill taxonomy |
+| `cpp_core/retrieval/` | BM25 probabilistic text retrieval for semantic/keyword overlap |
+| `cpp_core/features/` | ~85-feature engineering pipeline (education, experience, skills, semantic) |
+| `cpp_core/ranking/` | XGBoost ranker with a deterministic linear-weight fallback |
+| `cpp_core/explainability/` | Rule-based template explanations — no AI-generated narrative |
+| `src/bridge.py` | ctypes FFI bridge — Python only extracts PDF text and generates embeddings, C++ does all scoring |
+| `app.py` | Gradio UI; also ships a FastAPI backend, web frontend, and Chrome extension |
 
-De-Colab'd from an original research notebook — collapsed duplicate config/device/logger boilerplate into single canonical implementations (`src/config.py`, `src/devices.py`), fixed a phase-ordering bug, and simplified the ranker to a pure heuristic (dropped FAISS + LightGBM, which existed for candidate-pool ranking that a single resume/JD flow doesn't need).
+v1 → v2 was a full de-LLM-ification: Groq/`llama-3.3-70b` parsing, LLM skill extraction, the hardcoded 60/40 `HeuristicRanker`, and AI-generated narrative explanations were all replaced with deterministic native code. No `.env` file or API key required to run it.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-success?style=for-the-badge&logo=vercel&logoColor=white)](https://talentmatch-ai-se48.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-success?style=for-the-badge&logo=vercel&logoColor=white)](https://talentmatch-ai-o22y.vercel.app/)
 [![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/talentmatch-ai)
+
+---
+
+### Hybrid C++/Python Chatbot (No LLM)
+A conversational chatbot that reasons and responds **without any generative model** — no OpenAI, no Groq, no text generation of any kind. Responses are retrieved, computed, and composed deterministically via knowledge-base search, dialogue management, and hand-written neural components, with Python orchestrating and C++ doing the compute-heavy work.
+
+| Component | What it does |
+|---|---|
+| `cpp/src/lstm_cell.cpp` | Hand-written LSTM cell implemented from scratch in C++ |
+| `cpp/src/attention_pooling.cpp` | Custom attention-pooling layer for sequence representations |
+| `cpp/src/embedding_search.cpp` | Fast cosine-similarity search over the knowledge base |
+| `cpp/src/cognitive_engine.cpp` | Core native inference engine, exposed to Python via pybind11 |
+| `orchestrator/router.py` | Intent router dispatching between small talk, flow engine, KB search, and web search |
+| `orchestrator/flow_engine.py` | Multi-turn slot-filling conversation engine |
+| `orchestrator/dialogue_state.py` | Conversation history and dialogue-state tracking |
+| `orchestrator/composer.py` | Template + slot-filling response composition |
+| `orchestrator/tool_dispatch/web_search.py` | Optional live web search fallback (Google Custom Search), offline by default |
+
+Design principles: no LLMs, no generated text, fully deterministic, offline-first, with the embedding encoder swappable for a real model like `all-MiniLM-L6-v2` if desired.
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-success?style=for-the-badge&logo=vercel&logoColor=white)](https://chatbothybrid-1.onrender.com/)
+[![View Repository](https://img.shields.io/badge/View_Repository-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnshumanJ28/ChatBothybrid)
 
 ---
 
@@ -161,24 +183,26 @@ A few more things I've shipped, worth a quick look if you're curious:
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
-![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
+![C++](https://img.shields.io/badge/C++17-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-**ML / Data Science**
+**ML / Deep Learning**
 
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![Keras](https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-006ACC?style=for-the-badge&logo=python&logoColor=white)
 ![LightGBM](https://img.shields.io/badge/LightGBM-9ACD32?style=for-the-badge&logo=python&logoColor=white)
 ![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white)
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
-![Keras](https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white)
 ![timm](https://img.shields.io/badge/timm-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 ![Ultralytics YOLO](https://img.shields.io/badge/YOLOv8-111F68?style=for-the-badge&logo=yolo&logoColor=white)
+![ByteTrack](https://img.shields.io/badge/ByteTrack-111F68?style=for-the-badge&logo=yolo&logoColor=white)
 ![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=for-the-badge&logo=python&logoColor=white)
 
@@ -189,6 +213,16 @@ A few more things I've shipped, worth a quick look if you're curious:
 ![Groq](https://img.shields.io/badge/Groq-F55036?style=for-the-badge&logo=groq&logoColor=white)
 ![Hugging Face](https://img.shields.io/badge/Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
 ![Sentence Transformers](https://img.shields.io/badge/Sentence--Transformers-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
+![No-Framework Agents](https://img.shields.io/badge/Agents-No_Framework-2E8B57?style=for-the-badge&logo=OpenAI&logoColor=white)
+
+**Systems & Native Performance**
+
+![pybind11](https://img.shields.io/badge/pybind11-EE4C2C?style=for-the-badge&logo=python&logoColor=white)
+![CMake](https://img.shields.io/badge/CMake-064F8C?style=for-the-badge&logo=cmake&logoColor=white)
+![Make](https://img.shields.io/badge/Make-A42E2B?style=for-the-badge&logo=gnu&logoColor=white)
+![Aho-Corasick](https://img.shields.io/badge/Aho--Corasick-34d399?style=for-the-badge&logo=cplusplus&logoColor=white)
+![BM25](https://img.shields.io/badge/BM25-34d399?style=for-the-badge&logo=cplusplus&logoColor=white)
+![MCTS](https://img.shields.io/badge/MCTS-34d399?style=for-the-badge&logo=cplusplus&logoColor=white)
 
 **Document & NLP Processing**
 
@@ -209,8 +243,14 @@ A few more things I've shipped, worth a quick look if you're curious:
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Evidently AI](https://img.shields.io/badge/Evidently_AI-FF6B35?style=for-the-badge&logo=python&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Hugging Face Spaces](https://img.shields.io/badge/HF_Spaces-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
 ![Cloudflare](https://img.shields.io/badge/Cloudflare_Tunnel-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
+
+**Federated & Privacy-Preserving ML**
+
+![Flower](https://img.shields.io/badge/Flower-1F41BB?style=for-the-badge&logo=python&logoColor=white)
+![Opacus](https://img.shields.io/badge/Opacus-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
 
 **Tools & Platforms**
 
@@ -222,7 +262,6 @@ A few more things I've shipped, worth a quick look if you're curious:
 ![N8N](https://img.shields.io/badge/N8N-EA4B71?style=for-the-badge&logo=n8n&logoColor=white)
 ![Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white)
 ![Fusion 360](https://img.shields.io/badge/Fusion_360-0696D7?style=for-the-badge&logo=autodesk&logoColor=white)
-
 ---
 
 ## GitHub Stats
