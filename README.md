@@ -22,6 +22,7 @@ I care about the unglamorous middle part of ML — getting a model out of a note
 `Build the mechanism, not the wrapper.`
 
 **Chess engine?** No Stockfish — wrote the MCTS, the ResNet, the self-play loop.
+**Neural net?** No PyTorch — wrote the forward/backward pass, the optimizer, the streaming trainer in C/C++.
 **Resume scorer?** No LLM — wrote the parser, the trie, the ranker in C++.
 **Agent?** No LangChain — wrote the ReAct loop, the tool schemas, the guardrails.
 
@@ -31,16 +32,16 @@ I care about the unglamorous middle part of ML — getting a model out of a note
 
 ## Pinned Projects
 
-| Project | Repo | Demo | Highlights |
+| Project | Demo | Repo | Highlights |
 |:---|:---:|:---:|:---|
-| **LLM Agent From Scratch** | [Repo](https://github.com/AnshumanJ28/LLM-agent) | [Demo](https://llm-agent-tez2.onrender.com) | Hand-rolled ReAct loop, no LangChain/LangGraph/CrewAI. Auto-generated tool schemas, task memory, Docker-sandboxed code exec, JSONL tracing, 4/4 eval suite passing. |
-| **Chess Engine — AlphaZ0** | [Repo](https://github.com/AnshumanJ28/AlphaZ0) | [Demo](https://alphaz0.onrender.com) | Full rules engine, no Stockfish. 10-ResBlock policy/value network, MCTS with UCB + Dirichlet noise, self-play (A3C) training loop. |
-| **MLOps Demand Forecasting** | [Repo](https://github.com/AnshumanJ28/mlops-demand-forecasting) | — | End-to-end spatio-temporal demand pipeline: DVC data versioning, LightGBM + MLflow, FastAPI serving, Evidently drift monitoring, CI on every push. |
-| **TalentMatch AI v2** | [Repo](https://github.com/AnshumanJ28/talentmatch-ai) | [Demo](https://talentmatch-ai-jwqd.onrender.com/) | Resume/JD match scorer rebuilt fully native in C++ — no LLM, no API key. Aho-Corasick skill trie, BM25 retrieval, ~85-feature XGBoost ranker, rule-based explanations. |
-| **Hybrid Chatbot — No LLM** | [Repo](https://github.com/AnshumanJ28/ChatBothybrid) | [Demo](https://chatbothybrid-1.onrender.com/) | Deterministic conversational engine: hand-written LSTM + attention pooling in C++ (pybind11), intent router, slot-filling flow engine, KB cosine search. |
-| **RAG Document QA** | [Repo](https://github.com/AnshumanJ28/rag-document-qa) | — | Hybrid retrieval (FAISS + BM25, RRF fusion) over uploaded PDFs, Gemini Flash generation with page-level [n] citations, groundedness scoring, offline CI. |
-| **Recsys + A/B Testing** | [Repo](https://github.com/AnshumanJ28/recsys-ab-testing) | — | ALS recommender with a real evaluation layer — MD5-hashed bucketing, two-proportion z-test with power analysis, Streamlit dashboard, FastAPI serving. |
-| **YOLOv8 + ByteTrack** | [Repo](https://github.com/AnshumanJ28/YoLo8) | — | Real-time detection + multi-object tracking with persistent IDs, annotated video export, Gradio interface, MLflow experiment tracking. |
+| **Nocturne — NN Engine From Scratch** | [Demo](https://nn-trainer.onrender.com/) | [Repo](https://github.com/AnshumanJ28/Nocturne) | Full neural net engine in C/C++ — forward/backward prop, SGD, Xavier/He init, zero ML frameworks. Exposed via pybind11 + Flask SSE streaming, with a live weight editor. |
+| **LLM Agent From Scratch** | [Demo](https://llm-agent-tez2.onrender.com) | [Repo](https://github.com/AnshumanJ28/LLM-agent) | Hand-rolled ReAct loop, no LangChain/LangGraph/CrewAI. Auto-generated tool schemas, task memory, Docker-sandboxed code exec, JSONL tracing, 4/4 eval suite passing. |
+| **Chess Engine — AlphaZ0** | [Demo](https://alphaz0.onrender.com) | [Repo](https://github.com/AnshumanJ28/AlphaZ0) | Full rules engine, no Stockfish. 10-ResBlock policy/value network, MCTS with UCB + Dirichlet noise, self-play (A3C) training loop. |
+| **chalk — Calculus Engine From Scratch** | [Demo](https://chalk-z9gs.onrender.com/) | [Repo](https://github.com/AnshumanJ28/chalk) | Hand-written C++17 calculus engine — differentiation, symbolic integration, limits, equation solving. No SymPy, no Wolfram. Exposed to a Flask web app via pybind11. |
+| **TalentMatch AI v2** | [Demo](https://talentmatch-ai-jwqd.onrender.com/) | [Repo](https://github.com/AnshumanJ28/talentmatch-ai) | Resume/JD match scorer rebuilt fully native in C++ — no LLM, no API key. Aho-Corasick skill trie, BM25 retrieval, ~85-feature XGBoost ranker, rule-based explanations. |
+| **Hybrid Chatbot — No LLM** | [Demo](https://chatbothybrid-1.onrender.com/) | [Repo](https://github.com/AnshumanJ28/ChatBothybrid) | Deterministic conversational engine: hand-written LSTM + attention pooling in C++ (pybind11), intent router, slot-filling flow engine, KB cosine search. |
+| **MLOps Demand Forecasting** | — | [Repo](https://github.com/AnshumanJ28/mlops-demand-forecasting) | End-to-end spatio-temporal demand pipeline: DVC data versioning, LightGBM + MLflow, FastAPI serving, Evidently drift monitoring, CI on every push. |
+| **RAG Document QA** | — | [Repo](https://github.com/AnshumanJ28/rag-document-qa) | Hybrid retrieval (FAISS + BM25, RRF fusion) over uploaded PDFs, Gemini Flash generation with page-level [n] citations, groundedness scoring, offline CI. |
 
 ---
 
@@ -48,6 +49,10 @@ I care about the unglamorous middle part of ML — getting a model out of a note
 
 | Project | What it is |
 |:---|:---|
+| **[nninfer-c](https://github.com/AnshumanJ28/nninfer-c)** | Minimal C11 neural net inference engine — custom binary format, adversarial-input-safe loader, cache-blocked/threaded matmul with real before/after benchmarks |
+| **[threadpool](https://github.com/AnshumanJ28/threadpool)** | Two C thread-pool schedulers — single-queue vs. work-stealing — verified with ThreadSanitizer/ASan, real throughput benchmarks |
+| **[YoLo8](https://github.com/AnshumanJ28/YoLo8)** | Real-time detection + multi-object tracking with persistent IDs, annotated video export, Gradio interface, MLflow experiment tracking |
+| **[recsys-ab-testing](https://github.com/AnshumanJ28/recsys-ab-testing)** | ALS recommender with a real evaluation layer — MD5-hashed bucketing, two-proportion z-test with power analysis, Streamlit dashboard, FastAPI serving |
 | **[federated-learning-sim](https://github.com/AnshumanJ28/federated-learning-sim)** | Privacy-preserving FedAvg simulation (Flower + PyTorch) vs. centralized training, IID/non-IID splits, client dropout, optional Opacus differential privacy, Dockerized API |
 | **[rag-document-chatbot](https://github.com/AnshumanJ28/rag-document-chatbot)** | MMR retrieval + cross-encoder re-ranking, Groq Llama 3.1 generation, MLflow-tracked queries, Gradio chat UI |
 | **[NexusTwin](https://github.com/AnshumanJ28/NexusTwin)** | AI digital twin for smart building energy monitoring — simulated sensors, anomaly detection, forecasting, optimization recommendations |
