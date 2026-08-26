@@ -75,13 +75,7 @@ I care about the unglamorous middle part of ML — getting a model out of a note
 ## GitHub Stats
 
 <div align="center">
-<img src="https://github-readme-streak-stats-eight.vercel.app/?user=AnshumanJ28&hide_border=true&background=000000&ring=E63946&fire=E63946&currStreakLabel=E63946&sideLabels=E8E8E8&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=A0A0A0" width="49%" />
-</div>
-
-## LeetCode Stats
-
-<div align="center">
-<img src="https://github-readme-leetcode-stats.vercel.app/api?username=Darth_Anshuman&theme=dark" width="49%" />
+<img src="https://streak-stats.demolab.com/?user=AnshumanJ28&hide_border=true&background=000000&ring=E63946&fire=E63946&currStreakLabel=E63946&sideLabels=E8E8E8&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=A0A0A0" width="49%" />
 </div>
 
 ---
