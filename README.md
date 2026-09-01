@@ -32,16 +32,17 @@ I care about the unglamorous middle part of ML — getting a model out of a note
 
 ## Pinned Projects
 
-| Project | Demo | Repo | Highlights |
+| Project | Link | Repo | Highlights |
 |:---|:---:|:---:|:---|
-| **Nocturne — NN Engine From Scratch** | [Demo](https://nn-trainer.onrender.com/) | [Repo](https://github.com/AnshumanJ28/Nocturne) | Full neural net engine in C/C++ — forward/backward prop, SGD, Xavier/He init, zero ML frameworks. Exposed via pybind11 + Flask SSE streaming, with a live weight editor. |
-| **LLM Agent From Scratch** | [Demo](https://llm-agent-tez2.onrender.com) | [Repo](https://github.com/AnshumanJ28/LLM-agent) | Hand-rolled ReAct loop, no LangChain/LangGraph/CrewAI. Auto-generated tool schemas, task memory, Docker-sandboxed code exec, JSONL tracing, 4/4 eval suite passing. |
-| **Chess Engine — AlphaZ0** | [Demo](https://alphaz0.onrender.com) | [Repo](https://github.com/AnshumanJ28/AlphaZ0) | Full rules engine, no Stockfish. 10-ResBlock policy/value network, MCTS with UCB + Dirichlet noise, self-play (A3C) training loop. |
-| **chalk — Calculus Engine From Scratch** | [Demo](https://chalk-z9gs.onrender.com/) | [Repo](https://github.com/AnshumanJ28/chalk) | Hand-written C++17 calculus engine — differentiation, symbolic integration, limits, equation solving. No SymPy, no Wolfram. Exposed to a Flask web app via pybind11. |
-| **TalentMatch AI v2** | [Demo](https://talentmatch-ai-jwqd.onrender.com/) | [Repo](https://github.com/AnshumanJ28/talentmatch-ai) | Resume/JD match scorer rebuilt fully native in C++ — no LLM, no API key. Aho-Corasick skill trie, BM25 retrieval, ~85-feature XGBoost ranker, rule-based explanations. |
-| **Hybrid Chatbot — No LLM** | [Demo](https://chatbothybrid-1.onrender.com/) | [Repo](https://github.com/AnshumanJ28/ChatBothybrid) | Deterministic conversational engine: hand-written LSTM + attention pooling in C++ (pybind11), intent router, slot-filling flow engine, KB cosine search. |
-| **MLOps Demand Forecasting** | — | [Repo](https://github.com/AnshumanJ28/mlops-demand-forecasting) | End-to-end spatio-temporal demand pipeline: DVC data versioning, LightGBM + MLflow, FastAPI serving, Evidently drift monitoring, CI on every push. |
-| **RAG Document QA** | — | [Repo](https://github.com/AnshumanJ28/rag-document-qa) | Hybrid retrieval (FAISS + BM25, RRF fusion) over uploaded PDFs, Gemini Flash generation with page-level [n] citations, groundedness scoring, offline CI. |
+| **L.E.G.A.C.Y. — Truth Web Engine** | [Link](https://legacy-pps8.onrender.com/) | [Repo](https://github.com/AnshumanJ28/Legacy-public) | Logical Extraction & Graph Architecture for Complex Yields. Zero-dependency, high-performance logical extraction in native C++17 with a WebGL dashboard. |
+| **GENESIS — NeuroEvolution Sandbox** | [Link](https://genesis-chbz.onrender.com/) | [Repo](https://github.com/AnshumanJ28/GENESIS-public) | Real-time NeuroEvolution (NEAT) engine. Native C++ topologies and asynchronous physics streaming, forcing autonomous vehicles to evolve a neural brain dynamically. |
+| **JaNux — ML/DL Compute Engine** | [Link](https://janux.onrender.com/) | [Repo](https://github.com/AnshumanJ28/Janex-readme) | High-Performance ML/DL Compute Engine. Zero-dependency native math. No heavy frameworks. Entire mathematical foundation written from scratch in native C++. |
+| **Nocturne — NN Engine From Scratch** | [Link](https://nn-trainer.onrender.com/) | [Repo](https://github.com/AnshumanJ28/Nocturne-public) | Full neural net engine in C/C++ — forward/backward prop, SGD, Xavier/He init, zero ML frameworks. Exposed via pybind11 + Flask SSE streaming, with a live weight editor. |
+| **LLM Agent From Scratch** | [Link](https://llm-agent-tez2.onrender.com) | [Repo](https://github.com/AnshumanJ28/LLM-agent) | Hand-rolled ReAct loop, no LangChain/LangGraph/CrewAI. Auto-generated tool schemas, task memory, Docker-sandboxed code exec, JSONL tracing, 4/4 eval suite passing. |
+| **Chess Engine — AlphaZ0** | [Link](https://alphaz0.onrender.com/) | [Repo](https://github.com/AnshumanJ28/AlphaZ0-public) | Full rules engine, no Stockfish. 10-ResBlock policy/value network, MCTS with UCB + Dirichlet noise, self-play (A3C) training loop. |
+| **chalk — Calculus Engine From Scratch** | [Link](https://chalk-z9gs.onrender.com/) | [Repo](https://github.com/AnshumanJ28/chalk) | Hand-written C++17 calculus engine — differentiation, symbolic integration, limits, equation solving. No SymPy, no Wolfram. Exposed to a Flask web app via pybind11. |
+| **TalentMatch AI v2** | [Link](https://talentmatch-ai-jwqd.onrender.com/) | [Repo](https://github.com/AnshumanJ28/talentmatch-ai) | Resume/JD match scorer rebuilt fully native in C++ — no LLM, no API key. Aho-Corasick skill trie, BM25 retrieval, ~85-feature XGBoost ranker, rule-based explanations. |
+| **Hybrid Chatbot — No LLM** | [Link](https://chatbothybrid-1.onrender.com/) | [Repo](https://github.com/AnshumanJ28/ChatBothybrid) | Deterministic conversational engine: hand-written LSTM + attention pooling in C++ (pybind11), intent router, slot-filling flow engine, KB cosine search. |
 
 ---
 
@@ -49,8 +50,9 @@ I care about the unglamorous middle part of ML — getting a model out of a note
 
 | Project | What it is |
 |:---|:---|
+| **[MLOps Demand Forecasting](https://github.com/AnshumanJ28/mlops-demand-forecasting)** | End-to-end spatio-temporal demand pipeline: DVC data versioning, LightGBM + MLflow, FastAPI serving, Evidently drift monitoring, CI on every push. |
+| **[RAG Document QA](https://github.com/AnshumanJ28/rag-document-qa)** | Hybrid retrieval (FAISS + BM25, RRF fusion) over uploaded PDFs, Gemini Flash generation with page-level [n] citations, groundedness scoring, offline CI. |
 | **[nninfer-c](https://github.com/AnshumanJ28/nninfer-c)** | Minimal C11 neural net inference engine — custom binary format, adversarial-input-safe loader, cache-blocked/threaded matmul with real before/after benchmarks |
-| **[threadpool](https://github.com/AnshumanJ28/threadpool)** | Two C thread-pool schedulers — single-queue vs. work-stealing — verified with ThreadSanitizer/ASan, real throughput benchmarks |
 | **[YoLo8](https://github.com/AnshumanJ28/YoLo8)** | Real-time detection + multi-object tracking with persistent IDs, annotated video export, Gradio interface, MLflow experiment tracking |
 | **[recsys-ab-testing](https://github.com/AnshumanJ28/recsys-ab-testing)** | ALS recommender with a real evaluation layer — MD5-hashed bucketing, two-proportion z-test with power analysis, Streamlit dashboard, FastAPI serving |
 | **[federated-learning-sim](https://github.com/AnshumanJ28/federated-learning-sim)** | Privacy-preserving FedAvg simulation (Flower + PyTorch) vs. centralized training, IID/non-IID splits, client dropout, optional Opacus differential privacy, Dockerized API |
